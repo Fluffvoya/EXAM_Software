@@ -3,5 +3,6 @@
 
 void EnterAnime();
 void ExitAnime();
+void UpdateAnime();
 
 #endif

@@ -27,6 +27,7 @@
 #include "button.h"
 #include "image_demo.h"
 #include "menu.h"
+#include "stm32f1xx_hal.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -117,9 +118,13 @@ int main(void) {
     ListenEvent(&button_next, BUTTON_EVENT_RELEASE, ButtonNextCallback);
     ListenEvent(&button_ok, BUTTON_EVENT_RELEASE, ButtonOkCallback);
 
+    UpdateAnime();
+
+    OLED_Refresh();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+    HAL_Delay(10);
   }
   /* USER CODE END 3 */
 }

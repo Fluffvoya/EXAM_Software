@@ -10,11 +10,15 @@ uint8_t is_entered = 0;
 #define MENU_NUMBER 4
 
 void MenuNext() {
+  if (is_entered)
+    return;
   menu_state += 1;
   menu_state %= 4;
   ShowMenu();
 }
 void MenuPrev() {
+  if (is_entered)
+    return;
   if (menu_state == 0)
     menu_state = MENU_NUMBER - 1;
   else
