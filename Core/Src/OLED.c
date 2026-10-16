@@ -122,3 +122,117 @@ void OLED_Refresh(void) {
     OLED_WriteData(&OLED_GRAM[page][0], 128);
   }
 }
+
+// 画点：Color=1 点亮，Color=0 擦除
+void OLED_DrawPixel(int X, int Y, uint8_t Color) {
+  if (X < 0 || X >= 128 || Y < 0 || Y >= 64) {
+    return;
+  }
+
+  if (Color) {
+    OLED_GRAM[Y / 8][X] |= (1 << (Y % 8));
+  } else {
+    OLED_GRAM[Y / 8][X] &= ~(1 << (Y % 8));
+  }
+}
+
+// 画矩形：X,Y 左上角，Width 宽，Height 高，单位都是像素
+// Filled=0 空心矩形，Filled=1 填充矩形
+// Color=1 点亮，Color=0 擦除
+void OLED_DrawRectangle(int X, int Y, int Width, int Height, uint8_t Filled,
+                        uint8_t Color) {
+  if (Width <= 0 || Height <= 0) {
+    return;
+  }
+
+  int x0 = X;
+  int y0 = Y;
+  int x1 = X + Width - 1;
+  int y1 = Y + Height - 1;
+
+  // 裁剪到屏幕范围
+  if (x0 < 0)
+    x0 = 0;
+  if (y0 < 0)
+    y0 = 0;
+  if (x1 > 127)
+    x1 = 127;
+  if (y1 > 63)
+    y1 = 63;
+
+  if (x0 > x1 || y0 > y1) {
+    return;
+  }
+
+  if (Filled) {
+    // 填充矩形
+    for (int y = y0; y <= y1; y++) {
+      for (int x = x0; x <= x1; x++) {
+        OLED_DrawPixel(x, y, Color);
+      }
+    }
+  } else {
+    // 空心矩形
+    for (int x = x0; x <= x1; x++) {
+      OLED_DrawPixel(x, y0, Color);
+      OLED_DrawPixel(x, y1, Color);
+    }
+
+    for (int y = y0; y <= y1; y++) {
+      OLED_DrawPixel(x0, y, Color);
+      OLED_DrawPixel(x1, y, Color);
+    }
+  }
+}
+
+void OLED_DrawCircle(int X0, int Y0, int R, uint8_t Filled, uint8_t Color) {
+  if (R <= 0) {
+    return;
+  }
+
+  if (Filled) {
+    // 填充圆：逐行扫描，画水平线
+    for (int y = -R; y <= R; y++) {
+      // 计算当前行对应的 x 偏移量
+      // dx = sqrt(R^2 - y^2)
+      int dx = 0;
+      // 用整数逼近，避免浮点运算
+      while ((dx + 1) * (dx + 1) + y * y <= R * R) {
+        dx++;
+      }
+
+      int x_start = X0 - dx;
+      int x_end = X0 + dx;
+
+      for (int x = x_start; x <= x_end; x++) {
+        OLED_DrawPixel(x, Y0 + y, Color);
+      }
+    }
+  } else {
+    // 空心圆：中点画圆算法
+    int x = 0;
+    int y = R;
+    int d = 1 - R;
+
+    while (x <= y) {
+      OLED_DrawPixel(X0 + x, Y0 + y, Color);
+      OLED_DrawPixel(X0 - x, Y0 + y, Color);
+      OLED_DrawPixel(X0 + x, Y0 - y, Color);
+      OLED_DrawPixel(X0 - x, Y0 - y, Color);
+
+      OLED_DrawPixel(X0 + y, Y0 + x, Color);
+      OLED_DrawPixel(X0 - y, Y0 + x, Color);
+      OLED_DrawPixel(X0 + y, Y0 - x, Color);
+      OLED_DrawPixel(X0 - y, Y0 - x, Color);
+
+      if (d < 0) {
+        d += 2 * x + 3;
+      } else {
+        d += 2 * (x - y) + 5;
+        y--;
+      }
+      x++;
+    }
+  }
+}
+
