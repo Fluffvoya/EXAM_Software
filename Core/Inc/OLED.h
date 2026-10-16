@@ -13,7 +13,7 @@ void OLED_Clear(void);
 void OLED_ClearSpace(int X_START, int X_END, int Y_START, int Y_END);
 void OLED_DisClear(void);
 void OLED_Init(void);
-void OLED_DrawBitmap(const unsigned char Bitmap[], int X, int Page, int POSX,
+void OLED_DrawBitmap(unsigned char Bitmap[], int X, int Page, int POSX,
                      int POSPage);
 void OLED_Refresh(void);
 void OLED_DrawPixel(int X, int Y, uint8_t Color);

@@ -19,9 +19,9 @@ typedef struct {
   uint8_t event;
 } Button;
 
-typedef void (*Callback)(void);
+typedef void (*Callback)(void *data);
 
 void ListenButton(Button *button);
-void ListenEvent(Button *button, uint8_t event, Callback callback);
+void ListenEvent(Button *button, uint8_t event, Callback callback,void*data);
 
 #endif

@@ -9,54 +9,6 @@ uint8_t is_entered = 0;
 
 #define MENU_NUMBER 4
 
-void MenuNext() {
-  if (is_entered)
-    return;
-  menu_state += 1;
-  menu_state %= 4;
-  ShowMenu();
-}
-void MenuPrev() {
-  if (is_entered)
-    return;
-  if (menu_state == 0)
-    menu_state = MENU_NUMBER - 1;
-  else
-    menu_state -= 1;
-  menu_state %= 4;
-  ShowMenu();
-}
-
-void EnterItem() {
-  if (is_entered)
-    return;
-  is_entered = 1;
-  if (menu_state == 0) {
-    EnterLED();
-  } else if (menu_state == 1) {
-    EnterImage();
-  } else if (menu_state == 2) {
-    EnterAnime();
-  } else if (menu_state == 3) {
-    is_entered = 0;
-  }
-}
-void ExitItem() {
-  if (!is_entered)
-    return;
-  is_entered = 0;
-  if (menu_state == 0) {
-    ExitLED();
-  } else if (menu_state == 1) {
-    ExitImage();
-  } else if (menu_state == 2) {
-    ExitAnime();
-  } else if (menu_state == 3) {
-    is_entered = 1;
-  }
-  ShowMenu();
-}
-
 void ShowMenu() {
   OLED_Clear();
   OLED_Refresh();
@@ -107,7 +59,52 @@ void ShowMenu() {
   OLED_Refresh();
 }
 
-void ButtonBackCallback() { ExitItem(); }
-void ButtonPrevCallback() { MenuPrev(); }
-void ButtonNextCallback() { MenuNext(); }
-void ButtonOkCallback() { EnterItem(); }
+void ButtonBackCallback(void *data) {
+  if (!is_entered)
+    return;
+  is_entered = 0;
+  if (menu_state == 0) {
+    ExitLED();
+  } else if (menu_state == 1) {
+    ExitImage();
+  } else if (menu_state == 2) {
+    ExitAnime(data);
+  } else if (menu_state == 3) {
+    is_entered = 1;
+  }
+  ShowMenu();
+}
+
+void ButtonPrevCallback(void *data) {
+  if (is_entered)
+    return;
+  if (menu_state == 0)
+    menu_state = MENU_NUMBER - 1;
+  else
+    menu_state -= 1;
+  menu_state %= 4;
+  ShowMenu();
+}
+
+void ButtonNextCallback(void *data) {
+  if (is_entered)
+    return;
+  menu_state += 1;
+  menu_state %= 4;
+  ShowMenu();
+}
+
+void ButtonOkCallback(void *data) {
+  if (is_entered)
+    return;
+  is_entered = 1;
+  if (menu_state == 0) {
+    EnterLED();
+  } else if (menu_state == 1) {
+    EnterImage();
+  } else if (menu_state == 2) {
+    EnterAnime(data);
+  } else if (menu_state == 3) {
+    is_entered = 0;
+  }
+}

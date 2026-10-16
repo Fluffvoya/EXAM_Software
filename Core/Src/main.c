@@ -23,6 +23,7 @@
 /* USER CODE BEGIN Includes */
 #include "LED_demo.h"
 #include "OLED.h"
+#include "aemeath_anime.h"
 #include "anime_demo.h"
 #include "button.h"
 #include "image_demo.h"
@@ -100,9 +101,19 @@ int main(void) {
   Button button_prev = {GPIOA, GPIO_PIN_6, BUTTON_OFF, BUTTON_EVENT_OFF};
   Button button_next = {GPIOA, GPIO_PIN_5, BUTTON_OFF, BUTTON_EVENT_OFF};
   Button button_ok = {GPIOA, GPIO_PIN_4, BUTTON_OFF, BUTTON_EVENT_OFF};
+  Anime anime = {video_frames,
+                 VIDEO_FRAMES_FRAME_COUNT,
+                 0,
+                 10,
+                 VIDEO_FRAMES_WIDTH,
+                 VIDEO_FRAMES_PAGES,
+                 (128 - VIDEO_FRAMES_WIDTH) / 2,
+                 (8 - VIDEO_FRAMES_PAGES) / 2};
+
   OLED_Init();
 
   ShowMenu();
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -113,12 +124,12 @@ int main(void) {
     ListenButton(&button_next);
     ListenButton(&button_ok);
 
-    ListenEvent(&button_back, BUTTON_EVENT_RELEASE, ButtonBackCallback);
-    ListenEvent(&button_prev, BUTTON_EVENT_RELEASE, ButtonPrevCallback);
-    ListenEvent(&button_next, BUTTON_EVENT_RELEASE, ButtonNextCallback);
-    ListenEvent(&button_ok, BUTTON_EVENT_RELEASE, ButtonOkCallback);
+    ListenEvent(&button_back, BUTTON_EVENT_RELEASE, ButtonBackCallback, &anime);
+    ListenEvent(&button_prev, BUTTON_EVENT_RELEASE, ButtonPrevCallback, NULL);
+    ListenEvent(&button_next, BUTTON_EVENT_RELEASE, ButtonNextCallback, NULL);
+    ListenEvent(&button_ok, BUTTON_EVENT_RELEASE, ButtonOkCallback, &anime);
 
-    UpdateAnime();
+    UpdateAnime(&anime);
 
     OLED_Refresh();
     /* USER CODE END WHILE */

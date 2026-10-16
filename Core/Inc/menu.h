@@ -5,16 +5,10 @@
 
 extern uint8_t menu_state;
 
-void MenuNext();
-void MenuPrev();
-
-void EnterItem();
-void ExitItem();
-
 void ShowMenu();
 
-void ButtonBackCallback();
-void ButtonPrevCallback();
-void ButtonNextCallback();
-void ButtonOkCallback();
+void ButtonBackCallback(void *data);
+void ButtonPrevCallback(void *data);
+void ButtonNextCallback(void *data);
+void ButtonOkCallback(void *data);
 #endif

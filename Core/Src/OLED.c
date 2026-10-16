@@ -97,7 +97,7 @@ void OLED_Init(void) {
   OLED_Refresh();
 }
 
-void OLED_DrawBitmap(const unsigned char Bitmap[], int X, int Page, int POSX,
+void OLED_DrawBitmap(unsigned char Bitmap[], int X, int Page, int POSX,
                      int POSPage) {
   int Index = 0;
 
