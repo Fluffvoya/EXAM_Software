@@ -101,7 +101,7 @@ int main(void) {
   Button button_prev = {GPIOA, GPIO_PIN_6, BUTTON_OFF, BUTTON_EVENT_OFF};
   Button button_next = {GPIOA, GPIO_PIN_5, BUTTON_OFF, BUTTON_EVENT_OFF};
   Button button_ok = {GPIOA, GPIO_PIN_4, BUTTON_OFF, BUTTON_EVENT_OFF};
-  Anime anime = {video_frames,
+  Anime anime = {(uint8_t *)video_frames,
                  VIDEO_FRAMES_FRAME_COUNT,
                  0,
                  10,
