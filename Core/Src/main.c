@@ -22,7 +22,9 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "LED.h"
+#include "OLED.h"
 #include "anime_demo.h"
+#include "image_demo.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -91,7 +93,11 @@ int main(void) {
   MX_GPIO_Init();
   MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
+  OLED_Init();
 
+  EnterImage();
+  HAL_Delay(2000);
+  ExitImage();
   /* USER CODE END 2 */
 
   /* Infinite loop */
