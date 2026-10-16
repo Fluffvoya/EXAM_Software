@@ -2,7 +2,7 @@
 #define __BUTTON_H
 
 #include "main.h"
-
+#include <stdint.h>
 
 #define BUTTON_OFF 0
 #define BUTTON_ON 1
@@ -19,6 +19,9 @@ typedef struct {
   uint8_t event;
 } Button;
 
+typedef void (*Callback)(void);
+
 void ListenButton(Button *button);
+void ListenEvent(Button *button, uint8_t event, Callback callback);
 
 #endif

@@ -51,6 +51,7 @@ target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     Core/Src/anime.c
     Core/Src/anime_demo.c
     Core/Src/image_demo.c
+    Core/Src/menu.c
 )
 
 # Add include paths
