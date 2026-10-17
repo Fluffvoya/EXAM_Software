@@ -2,7 +2,7 @@
 #include "image_demo.h"
 
 void EnterImage() {
-  const uint8_t Bitmap1[128] = {
+  uint8_t Bitmap1[128] = {
       0X00, 0X00, 0X00, 0X00, 0X00, 0X80, 0X20, 0X20, 0X10, 0X98, 0X48, 0X24,
       0X24, 0X24, 0X24, 0X24, 0X24, 0X24, 0X24, 0X24, 0X04, 0X08, 0X98, 0X50,
       0X20, 0X20, 0X80, 0X00, 0X00, 0X00, 0X00, 0X00, 0X00, 0X00, 0XFC, 0X02,
@@ -17,7 +17,7 @@ void EnterImage() {
   };
   OLED_DrawBitmap(Bitmap1, 32, 4, 12, 2);
 
-  const uint8_t Bitmap2[158] = {
+  uint8_t Bitmap2[158] = {
       0XE0, 0X40, 0X40, 0XF8, 0X40, 0X20, 0XA0, 0XE0, 0X00, 0X00, 0X00, 0X00,
       0X00, 0X00, 0X00, 0X00, 0X10, 0X10, 0XD0, 0X28, 0X98, 0X88, 0X80, 0X80,
       0X00, 0X00, 0X00, 0X40, 0X50, 0XD0, 0XF8, 0X00, 0X00, 0X90, 0XF0, 0X08,
