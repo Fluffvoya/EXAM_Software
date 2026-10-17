@@ -1,6 +1,7 @@
 #include "startup.h"
 #include "OLED.h"
 #include "stm32f1xx_hal.h"
+#include "stm32f1xx_hal_gpio.h"
 
 void Startup() {
 
@@ -45,8 +46,10 @@ void Startup() {
   OLED_DrawBitmap(text_god, 22, 2, 80, 3);
   OLED_Refresh();
   HAL_Delay(2000);
+  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_11, GPIO_PIN_SET);
   OLED_Clear();
   OLED_DrawBitmap(text_Activate, 68, 2, 30, 3);
   OLED_Refresh();
   HAL_Delay(2000);
+  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_11, GPIO_PIN_RESET);
 }

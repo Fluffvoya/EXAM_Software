@@ -1,3 +1,4 @@
+#include "main.h"
 #include "game_demo.h"
 #include "OLED.h"
 #include <stdint.h>
@@ -40,6 +41,8 @@ void UpdateGame(Role *role) {
   }
   if (!role->is_over)
     OLED_DrawCircle(124, 60, 2, 1, 1);
+  else
+    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_11, GPIO_PIN_SET);
 }
 void ExitGame(Role *role) {
   game_menu_state = 0;
@@ -47,4 +50,5 @@ void ExitGame(Role *role) {
   role->y = 0;
   role->is_over = 0;
   role->state = 0;
+  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_11, GPIO_PIN_RESET);
 }
