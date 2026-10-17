@@ -1,6 +1,7 @@
 #ifndef __BUTTON_H
 #define __BUTTON_H
 
+#include "data.h"
 #include "main.h"
 #include <stdint.h>
 
@@ -19,9 +20,9 @@ typedef struct {
   uint8_t event;
 } Button;
 
-typedef void (*Callback)(void *data);
+typedef void (*Callback)(Data *);
 
 void ListenButton(Button *button);
-void ListenEvent(Button *button, uint8_t event, Callback callback,void*data);
+void ListenEvent(Button *button, uint8_t event, Callback callback, Data *data);
 
 #endif

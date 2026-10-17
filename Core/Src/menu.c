@@ -2,6 +2,7 @@
 #include "LED_demo.h"
 #include "OLED.h"
 #include "anime_demo.h"
+#include "game_demo.h"
 #include "image_demo.h"
 
 uint8_t menu_state = 0;
@@ -59,7 +60,7 @@ void ShowMenu() {
   OLED_Refresh();
 }
 
-void ButtonBackCallback(void *data) {
+void ButtonBackCallback(Data *data) {
   if (!is_entered)
     return;
   is_entered = 0;
@@ -68,14 +69,14 @@ void ButtonBackCallback(void *data) {
   } else if (menu_state == 1) {
     ExitImage();
   } else if (menu_state == 2) {
-    ExitAnime(data);
+    ExitAnime(data->anime);
   } else if (menu_state == 3) {
-    is_entered = 1;
+    ExitGame(data->role);
   }
   ShowMenu();
 }
 
-void ButtonPrevCallback(void *data) {
+void ButtonPrevCallback(Data *data) {
   if (is_entered)
     return;
   if (menu_state == 0)
@@ -86,7 +87,7 @@ void ButtonPrevCallback(void *data) {
   ShowMenu();
 }
 
-void ButtonNextCallback(void *data) {
+void ButtonNextCallback(Data *data) {
   if (is_entered)
     return;
   menu_state += 1;
@@ -94,7 +95,7 @@ void ButtonNextCallback(void *data) {
   ShowMenu();
 }
 
-void ButtonOkCallback(void *data) {
+void ButtonOkCallback(Data *data) {
   if (is_entered)
     return;
   is_entered = 1;
@@ -103,8 +104,18 @@ void ButtonOkCallback(void *data) {
   } else if (menu_state == 1) {
     EnterImage();
   } else if (menu_state == 2) {
-    EnterAnime(data);
+    EnterAnime(data->anime);
   } else if (menu_state == 3) {
-    is_entered = 0;
+    EnterGame(data->role);
   }
 }
+
+void ButtonLeftCallback(Data *data) { data->role->state = 1; }
+
+void ButtonUpCallback(Data *data) { data->role->state = 2; }
+
+void ButtonDownCallback(Data *data) { data->role->state = 3; }
+
+void ButtonRightCallback(Data *data) { data->role->state = 4; }
+
+void ButtonReleaseCallback(Data *data) { data->role->state = 0; }

@@ -28,7 +28,7 @@ void ListenButton(Button *button) {
   }
 }
 
-void ListenEvent(Button *button, uint8_t event, Callback callback, void *data) {
+void ListenEvent(Button *button, uint8_t event, Callback callback, Data *data) {
   if (button->event == event)
     callback(data);
 }
