@@ -12,6 +12,8 @@ set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_C_EXTENSIONS ON)
 
+set(CMAKE_CXX_STANDARD 17)
+
 
 # Define the build type
 if(NOT CMAKE_BUILD_TYPE)
@@ -28,8 +30,8 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS TRUE)
 project(${CMAKE_PROJECT_NAME})
 message("Build type: " ${CMAKE_BUILD_TYPE})
 
-# Enable CMake support for ASM and C languages
-enable_language(C ASM)
+# Enable CMake support for ASM, C and C++ languages
+enable_language(C CXX ASM)
 
 # Create an executable object type
 add_executable(${CMAKE_PROJECT_NAME})
@@ -45,15 +47,27 @@ target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE
 # Add sources to executable
 target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user sources here
-    Core/Src/button.c
-    Core/Src/LED_demo.c
-    Core/Src/OLED.c
-    Core/Src/anime.c
-    Core/Src/anime_demo.c
-    Core/Src/image_demo.c
-    Core/Src/menu.c
-    Core/Src/game_demo.c
-    Core/Src/startup.c
+    # Applicatiion
+    Core/Src/application.cpp
+    # Objects
+    Core/Src/object/button.cpp
+    Core/Src/object/anime.cpp
+    Core/Src/object/image.cpp
+    Core/Src/object/LED.cpp
+    # Image & Anime
+    Core/Src/anime/aemeath_anime.cpp
+    Core/Src/image/club_logo.cpp
+    Core/Src/image/ui_elements.cpp
+    Core/Src/image/kurisu_image.cpp
+    # Pages
+    Core/Src/pages/page_led.cpp
+    Core/Src/pages/page_image.cpp
+    Core/Src/pages/page_anime.cpp
+    Core/Src/pages/page_game.cpp
+    # Driver
+    Core/Src/driver/OLED.cpp
+    # Others
+    Core/Src/startup.cpp
 )
 
 # Add include paths
@@ -74,4 +88,8 @@ target_link_libraries(${CMAKE_PROJECT_NAME}
     stm32cubemx
 
     # Add user defined libraries
+)
+
+target_compile_options(${CMAKE_PROJECT_NAME} PRIVATE
+    $<$<COMPILE_LANGUAGE:CXX>:-fno-exceptions -fno-rtti -fno-threadsafe-statics>
 )
