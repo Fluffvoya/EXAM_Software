@@ -19,13 +19,6 @@
 #include "startup.hpp"
 #include "object_list.hpp"
 
-class Application
-{
-public:
-    static void start();
-    static void update();
-};
-
 Object *objects[] = {
     &ObjectList::button_back,
     &ObjectList::button_prev,
@@ -47,7 +40,7 @@ Object *objects[] = {
     &ObjectList::page_game,
 };
 
-void Application::start()
+void start()
 {
     OLED::Init();
     startup();
@@ -63,7 +56,7 @@ void Application::start()
     if (BUTTON.event == EVENT)              \
         ACTION;
 
-void Application::update()
+void update()
 {
     OLED::Clear();
     BUTTON_EVENT(ObjectList::button_back, ButtonEvent::RELEASE, ObjectList::menu.exitPage())
@@ -80,14 +73,4 @@ void Application::update()
         objects[i]->update();
     OLED::Refresh();
     HAL_Delay(10);
-}
-
-void start()
-{
-    Application::start();
-}
-
-void update()
-{
-    Application::update();
 }
