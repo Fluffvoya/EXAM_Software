@@ -11,8 +11,6 @@ struct Anime : public Object
     void start() override;
     void update() override;
 
-    bool hide{true};
-
 private:
     uint8_t *frames_;
     uint8_t frame_count_, frame_state_{0}, fps_;

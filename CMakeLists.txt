@@ -68,6 +68,7 @@ target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     Core/Src/driver/OLED.cpp
     # Others
     Core/Src/startup.cpp
+    Core/Src/object_list.cpp
 )
 
 # Add include paths

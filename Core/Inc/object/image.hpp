@@ -9,7 +9,6 @@ struct Image : public Object
           int posX, int posPage);
     void start() override;
     void update() override;
-    bool hide{true};
 
 private:
     uint8_t *image_;

@@ -9,6 +9,8 @@ void Button::start()
 
 void Button::update()
 {
+    if (!active)
+        return;
     listen();
 }
 
