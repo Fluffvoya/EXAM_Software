@@ -18,6 +18,8 @@ void Snack::update()
 {
     if (!active)
         return;
+    if (state_ != SnackState::NO_STATE)
+        return;
 
     if (frame_num_ < move_after_frames)
     {
@@ -27,14 +29,14 @@ void Snack::update()
     {
         frame_num_ = 0;
         // 往后方转，撤销本次操作
-        if (static_cast<int8_t>(dire_cache_) == static_cast<int8_t>(dire_))
+        if (static_cast<int8_t>(dire_cache_) == -static_cast<int8_t>(dire_))
             dire_ = dire_cache_;
         else
             dire_cache_ = dire_;
 
         auto last = --body_.end();
         auto first = body_.begin();
-        uint8_t x{first->x}, y{first->y};
+        int8_t x{first->x}, y{first->y};
         switch (dire_)
         {
         case Direction::UP:
@@ -52,11 +54,42 @@ void Snack::update()
         default:
             break;
         }
+
+        // 边界检测
+        if (x < 0 || y < 0 || x > 9 || y > 8)
+        {
+            gameOver();
+            return;
+        }
+        bool ate{false};
+
+        // 食物检测
+        if (x == food_->pos_.x && y == food_->pos_.y)
+        {
+            body_.push_back({});
+            last = --body_.end();
+            ate = true;
+        }
         *last = {x, y};
         // 移动
         body_.splice(first, body_, last);
+        // 身体检测
+        for (auto iter = ++body_.begin();
+             iter != body_.end();
+             iter++)
+        {
+            if (iter->x == x && iter->y == y)
+            {
+                gameOver();
+                return;
+            }
+        }
+        if (ate)
+        {
+            genFood();
+            source_ += 1;
+        }
     }
-
     // 绘制
     for (auto i : body_)
     {
@@ -69,7 +102,7 @@ void Snack::genFood()
     uint8_t total{};
 
     auto is_on_body =
-        [this](uint8_t i, uint8_t j)
+        [this](int8_t i, int8_t j)
     {
         for (auto item : body_)
         {
@@ -79,29 +112,57 @@ void Snack::genFood()
         return false;
     };
 
-    for (uint8_t i = 0; i < 9; i++)
+    for (int8_t i = 0; i < 9; i++)
     {
-        for (uint8_t j = 0; j < 8; j++)
+        for (int8_t j = 0; j < 8; j++)
         {
             if (!is_on_body(i, j))
                 total++;
         }
     }
+    if (total == 0)
+        gameWin();
 
     uint8_t food_pos = rand() % total;
-    for (uint8_t i = 0; i < 9; i++)
+    for (int8_t i = 0; i < 9; i++)
     {
-        for (uint8_t j = 0; j < 8; j++)
+        for (int8_t j = 0; j < 8; j++)
         {
             if (!is_on_body(i, j))
             {
                 if (food_pos == 0)
                 {
-                    food_->pos_ = {i, j};
+                    food_->pos_.x = i;
+                    food_->pos_.y = j;
                     return;
                 }
                 food_pos--;
             }
         }
     }
+}
+
+void Snack::gameOver()
+{
+    state_ = SnackState::GAME_OVER;
+    food_->is_win_or_lose_ = true;
+}
+
+void Snack::gameWin()
+{
+    state_ = SnackState::GAME_WIN;
+    food_->is_win_or_lose_ = true;
+}
+
+void Snack::reset()
+{
+    source_ = 0;
+    body_.clear();
+    body_.push_back({3, 6});
+    body_.push_back({3, 7});
+    dire_cache_ = Direction::UP;
+    dire_ = Direction::UP;
+    frame_num_ = 0;
+    state_ = SnackState::NO_STATE;
+    food_->is_win_or_lose_ = false;
 }

@@ -2,6 +2,7 @@
 
 #include "pages/page.hpp"
 #include "object/snack.hpp"
+#include "object/LED.hpp"
 
 struct PageGame : public Page, public Object
 {
@@ -13,4 +14,5 @@ struct PageGame : public Page, public Object
 private:
     Snack *snack_;
     Food *food_;
+    LED *led_;
 };

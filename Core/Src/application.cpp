@@ -59,19 +59,22 @@ void Application::start()
     ObjectList::menu.pages[3] = &ObjectList::page_game;
 }
 
-#define BUTTON_EVENT(BUTTON, EVENT, ACTION)
+#define BUTTON_EVENT(BUTTON, EVENT, ACTION) \
+    if (BUTTON.event == EVENT)              \
+        ACTION;
 
 void Application::update()
 {
     OLED::Clear();
-    if (ObjectList::button_back.event == ButtonEvent::RELEASE)
-        ObjectList::menu.exitPage();
-    if (ObjectList::button_prev.event == ButtonEvent::RELEASE)
-        ObjectList::menu.prevPage();
-    if (ObjectList::button_next.event == ButtonEvent::RELEASE)
-        ObjectList::menu.nextPage();
-    if (ObjectList::button_ok.event == ButtonEvent::RELEASE)
-        ObjectList::menu.enterPage();
+    BUTTON_EVENT(ObjectList::button_back, ButtonEvent::RELEASE, ObjectList::menu.exitPage())
+    BUTTON_EVENT(ObjectList::button_prev, ButtonEvent::RELEASE, ObjectList::menu.prevPage())
+    BUTTON_EVENT(ObjectList::button_next, ButtonEvent::RELEASE, ObjectList::menu.nextPage())
+    BUTTON_EVENT(ObjectList::button_ok, ButtonEvent::RELEASE, ObjectList::menu.enterPage())
+
+    BUTTON_EVENT(ObjectList::button_left, ButtonEvent::PRESS, ObjectList::snack.turnLeft())
+    BUTTON_EVENT(ObjectList::button_up, ButtonEvent::PRESS, ObjectList::snack.turnUp())
+    BUTTON_EVENT(ObjectList::button_down, ButtonEvent::PRESS, ObjectList::snack.turnDown())
+    BUTTON_EVENT(ObjectList::button_right, ButtonEvent::PRESS, ObjectList::snack.turnRight())
 
     for (uint8_t i = 0; i < sizeof(objects) / sizeof(void *); i++)
         objects[i]->update();

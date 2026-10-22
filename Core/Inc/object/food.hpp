@@ -5,7 +5,7 @@
 
 struct Point
 {
-    uint8_t x{}, y{};
+    int8_t x{}, y{};
 };
 
 struct Food : public Object
@@ -17,4 +17,5 @@ struct Food : public Object
 private:
     // managed by Snack
     Point pos_{};
+    bool is_win_or_lose_{};
 };
