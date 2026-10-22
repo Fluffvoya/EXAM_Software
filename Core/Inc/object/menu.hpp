@@ -19,6 +19,8 @@ public:
 
     void update() override
     {
+        if (!active)
+            return;
         if (is_entered_)
             return;
         showMenu();
@@ -26,11 +28,19 @@ public:
 
     void nextPage()
     {
+        if (!active)
+            return;
+        if (is_entered_)
+            return;
         curr_page_++;
         curr_page_ %= page_num;
     }
     void prevPage()
     {
+        if (!active)
+            return;
+        if (is_entered_)
+            return;
         if (curr_page_ == 0)
             curr_page_ = page_num - 1;
         else
@@ -40,6 +50,8 @@ public:
 
     void enterPage()
     {
+        if (!active)
+            return;
         if (is_entered_)
             return;
         is_entered_ = true;
@@ -47,6 +59,8 @@ public:
     }
     void exitPage()
     {
+        if (!active)
+            return;
         if (!is_entered_)
             return;
         is_entered_ = false;

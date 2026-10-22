@@ -28,5 +28,5 @@ void PageLED::enter()
 void PageLED::exit()
 {
     led_->active = false;
-    active = true;
+    active = false;
 }

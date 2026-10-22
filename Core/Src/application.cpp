@@ -34,7 +34,7 @@ Object *objects[] = {
     &ObjectList::button_left,
     &ObjectList::button_up,
     &ObjectList::button_down,
-    &ObjectList::button_ok,
+    &ObjectList::button_right,
     &ObjectList::led,
     &ObjectList::image,
     &ObjectList::anime,
