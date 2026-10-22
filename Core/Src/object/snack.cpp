@@ -56,7 +56,7 @@ void Snack::update()
         }
 
         // 边界检测
-        if (x < 0 || y < 0 || x > 9 || y > 8)
+        if (x < 0 || y < 0 || x > 9 - 1 || y > 8 - 1)
         {
             gameOver();
             return;
