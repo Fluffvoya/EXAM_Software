@@ -9,7 +9,7 @@
 #define TEXT_ANIME_WIDTH (40)
 #define TEXT_GAME_WIDTH (32)
 #define TEXT_GAME_OVER_WIDTH (72)
-#define TEXT_SOURCE_WIDTH (48)
+#define TEXT_SCORE_WIDTH (40)
 
 #define NUMBER_WIDTH (8)
 
@@ -21,7 +21,7 @@
 #define TEXT_ANIME_SIZE (TEXT_ANIME_WIDTH * TEXT_PAGES)
 #define TEXT_GAME_SIZE (TEXT_GAME_WIDTH * TEXT_PAGES)
 #define TEXT_GAME_OVER_SIZE (TEXT_GAME_OVER_WIDTH * TEXT_PAGES)
-#define TEXT_SOURCE_SIZE (TEXT_SOURCE_WIDTH * TEXT_PAGES)
+#define TEXT_SCORE_SIZE (TEXT_SCORE_WIDTH * TEXT_PAGES)
 
 #define NUMBER_0_SIZE (NUMBER_WIDTH * TEXT_PAGES)
 #define NUMBER_1_SIZE (NUMBER_WIDTH * TEXT_PAGES)
@@ -42,7 +42,7 @@ extern const unsigned char text_image[TEXT_IMAGE_SIZE];
 extern const unsigned char text_anime[TEXT_ANIME_SIZE];
 extern const unsigned char text_game[TEXT_GAME_SIZE];
 extern const unsigned char text_game_over[TEXT_GAME_OVER_SIZE];
-extern const unsigned char text_source[TEXT_SOURCE_SIZE];
+extern const unsigned char text_score[TEXT_SCORE_SIZE];
 
 extern const unsigned char number_0[NUMBER_0_SIZE];
 extern const unsigned char number_1[NUMBER_1_SIZE];

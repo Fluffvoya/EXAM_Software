@@ -150,7 +150,7 @@ TEXT_ITEMS = [
     ("text_anime",     "ANIME",     "TEXT_ANIME_WIDTH"),
     ("text_game",      "GAME",      "TEXT_GAME_WIDTH"),
     ("text_game_over", "GAME OVER", "TEXT_GAME_OVER_WIDTH"),
-    ("text_source",    "SOURCE",    "TEXT_SOURCE_WIDTH"),
+    ("text_score",    "SCORE",    "TEXT_SCORE_WIDTH"),
 ]
 
 NUM_WIDTH_MACRO = "NUMBER_WIDTH"
