@@ -30,6 +30,9 @@ Anime ObjectList::anime{
     (OLED::WIDTH - VIDEO_FRAMES_WIDTH) / 2,
     (OLED::PAGES - VIDEO_FRAMES_PAGES) / 2};
 
+Snack ObjectList::snack{};
+Food ObjectList::food{};
+
 Menu<4> ObjectList::menu{};
 
 PageLED ObjectList::page_led{};
