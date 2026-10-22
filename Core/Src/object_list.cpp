@@ -31,6 +31,7 @@ Anime ObjectList::anime{
     (OLED::PAGES - VIDEO_FRAMES_PAGES) / 2};
 
 Snack ObjectList::snack{};
+Food ObjectList::food{};
 
 Menu<4> ObjectList::menu{};
 

@@ -39,6 +39,7 @@ Object *objects[] = {
     &ObjectList::image,
     &ObjectList::anime,
     &ObjectList::snack,
+    &ObjectList::food,
     &ObjectList::menu,
     &ObjectList::page_led,
     &ObjectList::page_image,

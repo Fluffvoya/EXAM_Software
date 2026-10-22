@@ -9,6 +9,7 @@ void PageGame::start()
 {
     active = false;
     snack_ = &ObjectList::snack;
+    food_ = &ObjectList::food;
     bitmap_ = const_cast<uint8_t *>(text_game);
     x_ = TEXT_GAME_WIDTH;
     page_ = TEXT_PAGES;
@@ -48,10 +49,12 @@ void PageGame::enter()
 {
     active = true;
     snack_->active = true;
+    food_->active = true;
 }
 
 void PageGame::exit()
 {
     active = false;
     snack_->active = false;
+    food_->active = false;
 }

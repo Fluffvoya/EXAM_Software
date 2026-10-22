@@ -12,4 +12,5 @@ struct PageGame : public Page, public Object
 
 private:
     Snack *snack_;
+    Food *food_;
 };
