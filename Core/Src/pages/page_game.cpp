@@ -36,9 +36,9 @@ void PageGame::update()
     uint8_t ten = (snack_->getSource() / 10) % 10;
     if (snack_->getState() == SnackState::GAME_WIN)
     {
-        OLED::DrawBitmap(const_cast<uint8_t *>(text_source),
-                         TEXT_SOURCE_WIDTH, TEXT_PAGES,
-                         (OLED::WIDTH - TEXT_SOURCE_WIDTH) / 2,
+        OLED::DrawBitmap(const_cast<uint8_t *>(text_score),
+                         TEXT_SCORE_WIDTH, TEXT_PAGES,
+                         (OLED::WIDTH - TEXT_SCORE_WIDTH) / 2,
                          2);
         OLED::DrawBitmap(numbers[ten], NUMBER_WIDTH, TEXT_PAGES,
                          (OLED::WIDTH - NUMBER_WIDTH * 2) / 2,
@@ -55,9 +55,9 @@ void PageGame::update()
                          TEXT_GAME_OVER_WIDTH, TEXT_PAGES,
                          (OLED::WIDTH - TEXT_GAME_OVER_WIDTH) / 2,
                          1);
-        OLED::DrawBitmap(const_cast<uint8_t *>(text_source),
-                         TEXT_SOURCE_WIDTH, TEXT_PAGES,
-                         (OLED::WIDTH - TEXT_SOURCE_WIDTH) / 2,
+        OLED::DrawBitmap(const_cast<uint8_t *>(text_score),
+                         TEXT_SCORE_WIDTH, TEXT_PAGES,
+                         (OLED::WIDTH - TEXT_SCORE_WIDTH) / 2,
                          3);
         OLED::DrawBitmap(numbers[ten], NUMBER_WIDTH, TEXT_PAGES,
                          (OLED::WIDTH - NUMBER_WIDTH * 2) / 2,
@@ -68,9 +68,9 @@ void PageGame::update()
         return;
     }
     OLED::DrawRectangle(74, 0, 2, 64, 1, 1);
-    OLED::DrawBitmap(const_cast<uint8_t *>(text_source),
-                     TEXT_SOURCE_WIDTH, TEXT_PAGES,
-                     (OLED::WIDTH - 76 - TEXT_SOURCE_WIDTH) / 2 + 76,
+    OLED::DrawBitmap(const_cast<uint8_t *>(text_score),
+                     TEXT_SCORE_WIDTH, TEXT_PAGES,
+                     (OLED::WIDTH - 76 - TEXT_SCORE_WIDTH) / 2 + 76,
                      0);
     OLED::DrawBitmap(numbers[ten], NUMBER_WIDTH, TEXT_PAGES,
                      (OLED::WIDTH - 76 - NUMBER_WIDTH * 2) / 2 + 76,
