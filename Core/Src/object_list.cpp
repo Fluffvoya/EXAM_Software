@@ -31,3 +31,8 @@ Anime ObjectList::anime{
     (OLED::PAGES - VIDEO_FRAMES_PAGES) / 2};
 
 Menu<4> ObjectList::menu{};
+
+PageLED ObjectList::page_led{};
+PageImage ObjectList::page_image{};
+PageAnime ObjectList::page_anime{};
+PageGame ObjectList::page_game{};

@@ -6,6 +6,11 @@
 #include "object/image.hpp"
 #include "object/anime.hpp"
 
+#include "pages/page_led.hpp"
+#include "pages/page_image.hpp"
+#include "pages/page_anime.hpp"
+#include "pages/page_game.hpp"
+
 class ObjectList
 {
 public:
@@ -24,4 +29,8 @@ public:
     static Anime anime;
 
     static Menu<4> menu;
+    static PageLED page_led;
+    static PageImage page_image;
+    static PageAnime page_anime;
+    static PageGame page_game;
 };

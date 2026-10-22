@@ -22,20 +22,9 @@
 class Application
 {
 public:
-    static PageLED page_led;
-    static PageImage page_image;
-    static PageAnime page_anime;
-    static PageGame page_game;
-
-public:
     static void start();
     static void update();
 };
-
-PageLED Application::page_led{};
-PageImage Application::page_image{};
-PageAnime Application::page_anime{};
-PageGame Application::page_game{};
 
 Object *objects[] = {
     &ObjectList::button_back,
@@ -49,7 +38,12 @@ Object *objects[] = {
     &ObjectList::led,
     &ObjectList::image,
     &ObjectList::anime,
-    &ObjectList::menu};
+    &ObjectList::menu,
+    &ObjectList::page_led,
+    &ObjectList::page_image,
+    &ObjectList::page_anime,
+    &ObjectList::page_game,
+};
 
 void Application::start()
 {
@@ -57,10 +51,10 @@ void Application::start()
     startup();
     for (uint8_t i = 0; i < sizeof(objects) / sizeof(void *); i++)
         objects[i]->start();
-    ObjectList::menu.pages[0] = &Application::page_led;
-    ObjectList::menu.pages[1] = &Application::page_image;
-    ObjectList::menu.pages[2] = &Application::page_anime;
-    ObjectList::menu.pages[3] = &Application::page_game;
+    ObjectList::menu.pages[0] = &ObjectList::page_led;
+    ObjectList::menu.pages[1] = &ObjectList::page_image;
+    ObjectList::menu.pages[2] = &ObjectList::page_anime;
+    ObjectList::menu.pages[3] = &ObjectList::page_game;
 }
 
 #define BUTTON_EVENT(BUTTON, EVENT, ACTION)
