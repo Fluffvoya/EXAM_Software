@@ -27,6 +27,7 @@ public:
     static LED led;
     static Image image;
     static Anime anime;
+    static Snack snack;
 
     static Menu<4> menu;
     static PageLED page_led;

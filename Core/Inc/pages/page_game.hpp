@@ -1,7 +1,7 @@
 #pragma once
 
 #include "pages/page.hpp"
-#include "object/object.hpp"
+#include "object/snack.hpp"
 
 struct PageGame : public Page, public Object
 {
@@ -9,4 +9,7 @@ struct PageGame : public Page, public Object
     void update() override;
     void enter() override;
     void exit() override;
+
+private:
+    Snack *snack_;
 };

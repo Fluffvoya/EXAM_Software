@@ -54,6 +54,7 @@ target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     Core/Src/object/anime.cpp
     Core/Src/object/image.cpp
     Core/Src/object/LED.cpp
+    Core/Src/object/snack.cpp
     # Image & Anime
     Core/Src/anime/aemeath_anime.cpp
     Core/Src/image/club_logo.cpp
