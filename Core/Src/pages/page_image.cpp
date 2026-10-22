@@ -11,6 +11,8 @@ void PageImage::start()
     active = false;
 }
 
+void PageImage::update() {}
+
 void PageImage::enter()
 {
     active = true;
