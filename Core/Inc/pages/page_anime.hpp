@@ -3,12 +3,13 @@
 #include "pages/page.hpp"
 #include "object/anime.hpp"
 
-struct PageAnime : public Page
+struct PageAnime : public Page, public Object
 {
-    PageAnime(Anime *anime);
+    void start() override;
+    void update() override;
     void enter() override;
     void exit() override;
 
 private:
-    Anime *anime_;
+    Anime *anime_{};
 };

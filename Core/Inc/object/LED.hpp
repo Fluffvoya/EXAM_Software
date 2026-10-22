@@ -9,8 +9,6 @@ struct LED : public Object
     void start() override;
     void update() override;
 
-    bool light{false};
-
 private:
     GPIO_TypeDef *GPIOx_;
     uint16_t GPIO_Pin_;

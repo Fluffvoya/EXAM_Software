@@ -7,11 +7,14 @@ Anime::Anime(uint8_t *frames, uint8_t frame_count, uint8_t fps,
     : frames_(frames), frame_count_(frame_count), fps_(fps),
       x_(x), page_(page), pos_x_(pos_x), pos_page_(pos_page) {}
 
-void Anime::start() {}
+void Anime::start()
+{
+    active = false;
+}
 
 void Anime::update()
 {
-    if (hide)
+    if (!active)
         return;
     auto delta = 1000 / fps_;
     HAL_Delay(delta <= 10 ? delta : delta - 10);

@@ -7,11 +7,12 @@ Image::Image(uint8_t *image, int x, int page,
 
 void Image::start()
 {
+    active = false;
 }
 
 void Image::update()
 {
-    if (hide)
+    if (!active)
         return;
     OLED::DrawBitmap(image_, x_, page_, pos_x_, pos_page_);
 }

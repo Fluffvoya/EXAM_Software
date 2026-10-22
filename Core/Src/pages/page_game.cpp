@@ -7,10 +7,15 @@ PageGame::PageGame()
     bitmap_ = const_cast<uint8_t *>(text_game);
     x_ = TEXT_GAME_WIDTH;
     page_ = TEXT_PAGES;
+    active = false;
 }
 
-void PageGame::enter() {}
+void PageGame::enter()
+{
+    active = true;
+}
 
 void PageGame::exit()
 {
+    active = true;
 }

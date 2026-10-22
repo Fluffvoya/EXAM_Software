@@ -1,20 +1,24 @@
 #include "pages/page_image.hpp"
 #include "image/ui_elements.hpp"
+#include "object_list.hpp"
 
-PageImage::PageImage(Image *image)
-    : image_(image)
+void PageImage::start()
 {
     bitmap_ = const_cast<uint8_t *>(text_image);
     x_ = TEXT_IMAGE_WIDTH;
     page_ = TEXT_PAGES;
+    image_ = &ObjectList::image;
+    active = false;
 }
 
 void PageImage::enter()
 {
-    image_->hide = false;
+    active = true;
+    image_->active = true;
 }
 
 void PageImage::exit()
 {
-    image_->hide = true;
+    active = true;
+    image_->active = false;
 }
